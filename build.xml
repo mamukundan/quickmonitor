@@ -1,0 +1,60 @@
+
+<project name="QuickMonitor" default="all" basedir=".">
+	<property name="app.name"   value="QuickMonitor" />
+	<property name="build.dir"  value="build" />
+	<property name="main.build.dir"  value="build/mainclasses" />
+	<property name="test.build.dir"  value="build/testcases" />
+	<property name="dist.dir"   value="dist" />
+
+	<target name="clean">
+		<delete dir="${main.build.dir}" />
+		<delete dir="${test.build.dir}" />
+		<delete dir="${build.dir}" failonerror="false"/>
+	</target>
+
+	<path id="project.classpath">
+		<fileset dir="./lib/">
+			<include name="**/*.jar"/>
+		</fileset>		
+	</path>
+	
+
+	<!-- main jar -->
+	<target name="main_compile"  depends="clean">
+		<mkdir dir="${main.build.dir}"/>
+		<javac srcdir="src/main/" destdir="${main.build.dir}" debug="on" 
+				deprecation="on" optimize="on" includeantruntime="false" target="1.5">
+			<include name="**/*.java"/>
+			<classpath refid="project.classpath"/>
+		</javac>
+	</target>
+
+	<target name="main_jar" depends="main_compile">
+		<mkdir dir="${dist.dir}"/>
+		<jar jarfile="${dist.dir}/QuickMonitor.jar"
+			basedir="${main.build.dir}" includes="**" manifest="src/QuickMonitor.MF"/>
+	</target>
+	<!-- main jar -->
+	
+	
+
+	<target name="run" depends="main_jar">
+		<java fork="yes" classname="com.google.code.quickmonitor.service.MonitorService"
+            taskname="QuickMonitor" failonerror="true">
+			<classpath refid="project.classpath"/>
+			<classpath>
+				<fileset dir="dist">
+					<include name="**/*.jar"/>
+				</fileset>
+			</classpath>
+		</java>
+	</target>
+	
+	<target name="jar" depends="main_jar" />
+
+	<target name="all" depends="jar" />
+
+	
+
+</project>
+

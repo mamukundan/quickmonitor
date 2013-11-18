@@ -1,0 +1,22 @@
+#
+# sample config file for checking udp server
+#
+
+#type - socket, sslsocket, http, ping
+type=udp
+
+host=127.0.0.1
+port=8866
+
+timeout=60000
+
+RequestSource=text
+
+#will be used only if RequestSource=text
+RequestText=version
+
+ResponseTextToExpect=Bad
+
+intervalInSec=60
+
+mailNotification=Y

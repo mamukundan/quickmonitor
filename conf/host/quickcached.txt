@@ -1,0 +1,29 @@
+#
+# sample config file for checking memcached/quickcached server
+#
+
+#type - socket, sslsocket, http, ping
+type=socket
+
+host=127.0.0.1
+port=11211
+
+timeout=60000
+
+
+#RequestSource=file
+#RequestSource=text
+
+RequestSource=file
+
+#always relative to root folder from where you run.
+file=./conf/host/request/quickcached_data.txt
+
+#will be used only if RequestSource=text
+RequestText=version\r\n
+
+ResponseTextToExpect=VERSION 1.
+
+intervalInSec=60
+
+mailNotification=N

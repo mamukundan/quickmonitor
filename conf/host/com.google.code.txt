@@ -1,0 +1,19 @@
+#type - socket, sslsocket, http, ping
+type=http
+
+url=http://code.google.com/
+HttpStatusCode=200
+
+#host=code.google.com
+#port=80
+
+timeout=60000
+
+
+TextToExpect=
+RequestText=
+ResponseTextToExpect=
+
+intervalInSec=60
+
+mailNotification=N
